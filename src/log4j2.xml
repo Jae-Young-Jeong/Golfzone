@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<Configuration status="INFO"> 
+	<Appenders> 
+
+<!--  
+		<RollingFile name="rollingFile" fileName="/LOGs/re-sungrak"  filePattern="/LOGs/re-sungrak.%d{yyMMdd}.log" append="true">
+			<PatternLayout charset="UTF-8"  pattern="%d{HH:mm:ss} %-5level %c(%L) - %msg%n"/>
+			<TimeBasedTriggeringPolicy />
+		</RollingFile>
+
+		<File name="logfile" fileName="/LOGs/re-sungrak.log" append="true" ignoreExceptions="false"> 
+			<PatternLayout charset="UTF-8"  pattern="[%p] %c:%L - %m%n"/> 
+		</File>
+-->		 
+		<Console name="STDOUT" target="SYSTEM_OUT" ignoreExceptions="false">
+			<PatternLayout charset="UTF-8"  pattern="[%p] %c - %m%n"/> 
+		</Console> 
+	</Appenders> 
+	<Loggers> 		 
+		<Root level="INFO"> 
+			<AppenderRef ref="STDOUT"/> 
+<!--  
+			<AppenderRef ref="rollingFile"/>
+-->
+		</Root> 
+	</Loggers> 
+</Configuration>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Context path="/db" docBase="" crossContext="true" reloadable="true" debug="1">
+<!-- 5.7.x com.mysql.jdbc.Driver  8.0.x com.mysql.cj.jdbc.Driver  -->
+
+	 <Resource auth="Container" 
+	 
+                           name="jdbc/db" 
+		        driverClassName="com.mysql.jdbc.Driver"  
+		                factory="org.apache.tomcat.jdbc.pool.DataSourceFactory" 
+		                   type="javax.sql.DataSource" 
+	          defaultAutoCommit="false" 
+		            initialSize="1"
+		              maxActive="5"
+		                minIdle="1"   maxIdle="5" 
+		                maxWait="5"
+		               username="golfzone" 
+		               password="golfzone!00" 
+		                    url="jdbc:mysql://localhost:3306/golfzone?autoReconnect=true" 
+		        validationQuery="SELECT 1" 
+		           testOnBorrow="true"
+		        removeAbandoned="true"
+		 removeAbandonedTimeout="60"
+		           logAbandoned="true"
+	 />
+
+</Context>

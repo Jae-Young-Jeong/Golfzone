@@ -1,0 +1,303 @@
+
+/*
+@import url(http://cdn.jsdelivr.net/gh/joungkyun/font-d2coding/d2coding.css);
+
+D2Coding
+*/
+@import url( http://fonts.googleapis.com/earlyaccess/nanumgothic.css );
+
+@media  screen {
+	.screenOnly { display: block; }
+	.printOnly  { display: none;  }
+}
+
+@media print {
+	.screenOnly { display: none; }
+	.printOnly  { display: block;  }
+	
+	
+	input { border: 0; }
+	textarea { border: 0; }
+	select	{ border: 0; 
+				-moz-appearance: none; /* Firefox */
+			 -webkit-appearance: none; /* Safari and Chrome */
+			         appearance: none;
+	}
+	select::-ms-expand { display:none; }			
+}
+
+* {
+	-webkit-box-sizing: border-box;
+	   -moz-box-sizing: border-box;
+			box-sizing: border-box;
+			
+		-webkit-background-clip: border-box;
+		   -moz-background-clip: border-box;
+			    background-clip: border-box;
+			
+				margin: 0;
+           font-family: "Nanum Gothic", "맑은고딕", "ngWeb", sans-serif;
+/*
+           line-height:	1.3rem; 
+*/
+		font-size: 1.0rem; 
+}
+
+
+select::-ms-expand { -webkit-appearance: none; -moz-appearance: none; appearance: none;  border:0; background-color: transparent; }
+
+input { border: 0.1px solid #808080; }
+input[type=text]::-ms-clear{display: none; }
+input[type=button] { }
+
+div.table-scroller {  overflow: scroll; overflow-x: hidden; position: relative; display: inline-block; width: 1200px; min-height: 250px; max-height: 500px;  margin-bottom: 25px; }
+
+table { cellspacing:0; cellpadding:0;  border-spacing: 0; border-collapse: collapse;  }
+thead th { height: 38px; background-color: #eaeaea; border: 0.1px solid #d0d0d0; }
+
+
+
+tr.delete,
+tr.delete input[type=text],
+tr.delete select,
+tr.delete textarea  { background-color: #fdfdfd; text-decoration: line-through;}
+
+table.normal {  }
+table.normal th { min-height: 38px; }
+table.normal td { min-height: 38px; }
+
+
+table.type1 { }
+table.type1 tr input[type=text] { width: 100%;}
+table.type1 tr textarea { width: 100%;}
+
+
+input.number,
+input.amt { text-align: right; padding-right: 10px; }
+
+.imKor	{ ime-mode: active;   -webkit-ime-mode: active; -moz-ime-mode: active; -ms-ime-mode: active; }
+.imEng	{ ime-mode: inactive; -webkit-ime-mode: inactive; -moz-ime-mode: inactive; -ms-ime-mode: inactive; }
+.imPwd	{ ime-mode: disabled; }
+
+.hide   { display: none; }
+
+.cursor-pointer, .cp { cursor: pointer; }
+.float-right { float: right; }
+.float-left  { float: left;  }
+.text-align-left, .tal  { text-align: left; }
+.text-align-right, .tar { text-align: right; }
+.text-align-center, .tac { text-align: center; }
+.clear-both, .cb { clear: both; }
+.font-weight-bold , .fwb { font-weight: bold; }
+.inline-block, .dib { display: inline-block; }
+.border0, .b0 { border:0; }
+.disabled { cursor: not-allowed; disabled; }
+
+.default-line-height { height: 38px; }
+.sexType-남 { background-color: blue; display:inline-block; width: 10px; height: 10px; border-radius: 50%; vertical-align: middle; margin-left: 3px; margin-right: 3px; }
+.sexType-여 { background-color: pink; display:inline-block; width: 10px; height: 10px; border-radius: 50%; vertical-align: middle; margin-left: 3px; margin-right: 3px; }
+
+.shape-1 {
+         display: inline-block;
+   border-radius: 3px;
+           color: #ffffff !important;
+       font-size: 13px;
+      text-align: center;
+         padding: 0 5px 0 5px;
+background-color: #348fe2;
+  letter-spacing:-1px;
+     line-height: 26px;
+          cursor: pointer;
+}
+
+.size-90p {	width: 90%; }
+.size-91p {	width: 91%; }
+.size-92p {	width: 92%; }
+.size-93p {	width: 93%; }
+.size-94p {	width: 94%; }
+.size-95p {	width: 95%; }
+.size-96p {	width: 96%; }
+.size-97p {	width: 97%; }
+.size-98p {	width: 98%; }
+.size-99p {	width: 99%; }
+.size-100 { width: 100%;}
+
+.h-small  { height: 20px; }
+.h-middle { height: 28px; }
+.h-large  { height: 40px; }
+.h-98     { height: 98%; }
+
+
+.color-blue {
+	          border: none;
+             display: inline-block;
+       border-radius: 3px;
+               color: white;
+     text-decoration: none;
+		  text-align: center;
+        padding-left: 3px;
+       padding-right: 3px;
+	background-color: #348fe2;
+         line-height: 26px;
+              cursor: pointer;
+           min-width: 28px;
+              height: 28px; 
+      vertical-align: middle;
+	}
+
+input[type=button].black, button.black {
+	border: 0.1px solid #d0d0d0;
+	background-color: white; color: black;  display: inline-block; padding: 10px;
+	border-radius: 5px; 
+	height: 45px;
+	
+}
+input[type=button].black:hover, button.black:hover {
+	background-color: black; color: white; 
+}
+
+.btnPlus {
+        background-image: url('icons/btnPlus.png');
+       background-repeat: no-repeat;
+         background-size: contain;
+     background-position: center;
+                  border: none;
+        background-color: transparent;
+                  cursor: pointer;
+          vertical-align: middle;
+}
+
+.btnDel {
+        background-image: url('icons/btnDel.png');
+       background-repeat: no-repeat;
+         background-size: contain;
+     background-position: center;
+                  border: none;
+        background-color: transparent;
+                  cursor: pointer;
+          vertical-align: middle;
+}
+
+.btnMinus {
+        background-image: url('icons/btnMinus.png');
+       background-repeat: no-repeat;
+         background-size: contain;
+     background-position: center;
+                  border: none;
+        background-color: transparent;
+                  cursor: pointer;
+          vertical-align: middle;
+}
+
+.btnUncheck {
+        background-image: url('icons/btnUncheck.png');
+       background-repeat: no-repeat;
+         background-size: contain;
+     background-position: center;
+                  border: none;
+        background-color: transparent;
+                  cursor: pointer;
+          vertical-align: middle;
+}
+
+.btnQuestion {
+        background-image: url('icons/btnQuestion.png');
+       background-repeat: no-repeat;
+         background-size: contain;
+     background-position: center;
+                  border: none;
+        background-color: transparent;
+                  cursor: pointer;
+          vertical-align: middle;
+}
+
+.btnPower {
+        background-image: url('icons/power-24x24.png');
+       background-repeat: no-repeat;
+         background-size: contain;
+     background-position: center;
+                  border: none;
+        background-color: transparent;
+                  cursor: pointer;
+          vertical-align: middle;
+}
+
+.btnChange {
+        background-image: url('icons/change.png');
+       background-repeat: no-repeat;
+         background-size: contain;
+     background-position: center;
+                  border: none;
+        background-color: transparent;
+                  cursor: pointer;
+          vertical-align: middle;
+}
+
+
+
+.btnCheck {
+        background-image: url('icons/btnCheck.png');
+       background-repeat: no-repeat;
+         background-size: contain;
+     background-position: center;
+                  border: none;
+        background-color: transparent;
+                  cursor: pointer;
+          vertical-align: middle;
+}
+
+
+.btnUncheck {
+        background-image: url('icons/btnUncheck.png');
+       background-repeat: no-repeat;
+         background-size: contain;
+     background-position: center;
+                  border: none;
+        background-color: transparent;
+                  cursor: pointer;
+          vertical-align: middle;
+}
+
+
+
+.my-rootlayer{position: fixed; left:0; top:0; right:0; bottom:0;  z-index:9999; ;}
+
+.my-popupLayer {position:absolute; left:0; top:0; width:100%; height:100%; z-index:100; -ms-filter: alpha(opacity=50); filter: alpha(opacity=50); opacity:0.5; -moz-opacity:0.5;}
+.my-popupLayer .back {position:absolute; left:0; top:0; width:100%; height:100%; background:#000; z-index:101;}
+.my-popup_box {position:absolute; left:36%; top:42%; width:1000px; height:550px; margin-left:-250px; margin-top:-250px; z-index:102; background:#fff; border-radius: 0.25em;}
+.my-popup_box .popup_contents {position:absolute; left:0; top:0; width:100%; height:100%; text-align:center; z-index:102; border-radius: 0.25em; box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.6), 0 5px 5px 0 rgba(0, 0, 0, 0.64);}
+
+.my-popup_text{ position: relative; display: inline-block;  z-index: 1;  background: ; width:90%; padding:30px; height:55%; font-size:14px; font-weight:; color:#666666; line-height:20px; text-align:center;
+	border-bottom: 0.1px; border-bottom-style:solid; border-bottom-color:#cea8b4; margin-bottom:20px;}
+		   
+.my-popup_text_02{ position: relative; display: inline-block;  z-index: 1;  background: ; width:90%; padding:30px; height:45%; font-size:16px; font-weight:600; color:#666666; line-height:20px; text-align:center;
+    border-bottom: 0.1px; border-bottom-style:solid; border-bottom-color:#cea8b4; margin-bottom:20px; margin-top:70px;}	
+		   
+
+
+.my-popup_button {text-transform:uppercase; text-align:center; display:inline-block; margin:0 0 10px 0; outline:0; background:#d36288; width:26%; border:0; padding:5px; color:#FFFFFF; font-size:15px; line-height:28px; 
+    -webkit-transition: all 0.3 ease;  transition: all 0.3 ease;  cursor: pointer;}
+
+
+
+
+/* alertify */
+.ajs-message { border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; -ms-border-radius: 5px; color: black; }
+
+.ajs-message.ajs-yellow { background-color: #ffffb3; }
+.ajs-message.ajs-green  { background-color: #b3ffcc; }
+.ajs-message.ajs-blue   { background-color: #ccd9ff; }
+.ajs-message.ajs-red    { background-color: #ffcccc; }
+.ajs-message.ajs-white  { background-color: white; border: 0.1px solid black; color: black; }
+.ajs-message.ajs-black  { background-color: #d9d9d9; color: white;}
+
+.ajs-message.ajs-SUCCESS  { background-color: white;   border: 0.1px solid #d0d0d0; color: black; }
+.ajs-message.ajs-INFO     { background-color: #ffffb3; border: 0.1px solid #d0d0d0; color: black; }
+.ajs-message.ajs-ERROR    { background-color: #ffcccc; border: 0.1px solid #d0d0d0; color: black; }
+
+
+div.xContainer { text-align: center;  position: relative;  } 
+div.xInner { text-align: left;  width: 1200px;   display: inline-block; position: relative;}
+
+
+

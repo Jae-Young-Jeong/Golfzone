@@ -5,6 +5,10 @@ DESCRIPTION : 권한자(팀장, 원장) 이  본인또는 하위 사원이 등�
     HISTORY :
 http://localhost:8080/tbls/user_work/user_work-excel-type1.jsp
 ---------------------------------------------------------------------------- --%>
+<%@page import="org.apache.poi.ss.usermodel.BorderStyle"%>
+<%@page import="org.apache.poi.xssf.usermodel.XSSFDataFormat"%>
+<%@page import="org.apache.poi.xssf.usermodel.XSSFCellStyle"%>
+<%@page import="org.apache.poi.ss.usermodel.CellType"%>
 <%@page import="java.io.FileOutputStream"%>
 <%@page import="org.apache.poi.ss.usermodel.Cell"%>
 <%@page import="org.apache.poi.ss.usermodel.Row"%>
@@ -102,8 +106,22 @@ int colidx = 0;
 int rowidx = 0;
 int base_row = 1;
 int base_col = 4;
+int max_row  = 0;
 Row xlrow = null;
 HashMap<String, String> m = null;
+XSSFCellStyle cellstyle1 = workbook.createCellStyle();
+XSSFCellStyle cellstyle2 = workbook.createCellStyle();
+XSSFCellStyle cellstyle3 = workbook.createCellStyle();
+
+XSSFDataFormat fmt = workbook.createDataFormat();
+
+cellstyle1.setDataFormat(fmt.getFormat("#,##0.00%"));
+cellstyle2.setWrapText(true);
+
+cellstyle3.setBorderRight(BorderStyle.THIN);
+cellstyle3.setBorderLeft(BorderStyle.THIN);
+cellstyle3.setBorderTop(BorderStyle.THIN);
+cellstyle3.setBorderBottom(BorderStyle.THIN);
 
 
 xlrow = sheet.getRow(0); if(xlrow == null) xlrow = sheet.createRow(0); 
@@ -120,8 +138,8 @@ for (rowidx = 0; rowidx < rows.size(); rowidx++) {
 	
 	colidx = 0;  c = xlrow.getCell( colidx );  if(c == null) c = xlrow.createCell(colidx);	c.setCellValue( m.get("emp_no") );
 	colidx = 1;  c = xlrow.getCell( colidx );  if(c == null) c = xlrow.createCell(colidx);	c.setCellValue( m.get("emp_nm") );
-	colidx = 2;  c = xlrow.getCell( colidx );  if(c == null) c = xlrow.createCell(colidx);	c.setCellValue( m.get("tech_note") );
-	colidx = 3;  c = xlrow.getCell( colidx );  if(c == null) c = xlrow.createCell(colidx);	c.setCellValue( m.get("memo_note") );
+	colidx = 2;  c = xlrow.getCell( colidx );  if(c == null) c = xlrow.createCell(colidx);	c.setCellValue( m.get("tech_note") ); c.setCellStyle(cellstyle2);
+	colidx = 3;  c = xlrow.getCell( colidx );  if(c == null) c = xlrow.createCell(colidx);	c.setCellValue( m.get("memo_note") ); c.setCellStyle(cellstyle2);
 }
 
 
@@ -134,14 +152,33 @@ for (int didx = 0; didx < data.size(); didx++) {
 	rowidx = Integer.parseInt(m.get("user_seqno"));
 	colidx = Integer.parseInt(m.get("ym_seq"));
 	ratio  = Double.parseDouble(m.get("tot_radio"));
+	
+	if(rowidx > max_row) max_row = rowidx;
 
 	xlrow = sheet.getRow(base_row + rowidx);  		if(xlrow == null) xlrow = sheet.createRow(base_row + rowidx);
 	c     = xlrow.getCell(base_col + colidx); 		if(c     == null) c     = xlrow.createCell(base_col + colidx);
 	
+	
+	c.setCellStyle(cellstyle1);
 	c.setCellValue(ratio);
 }
 
+//즐긋기
+/*
+for(rowidx = 0; rowidx < (max_row+1); rowidx++) {
+	xlrow = sheet.getRow(rowidx);   if(xlrow == null) xlrow = sheet.createRow(rowidx);
+	for(colidx = 0; colidx < (4 + cols.size()); colidx++) {
+		c = xlrow.getCell(colidx); 		if(c  == null) c = xlrow.createCell(colidx);
+		
+		c.setCellStyle(cellstyle3);
+	}
+}
+*/
 
+
+
+
+// 작업끝 -> 저장하기 
 FileOutputStream fos = null;
 try{
 	fos = new FileOutputStream(excel_save_file);

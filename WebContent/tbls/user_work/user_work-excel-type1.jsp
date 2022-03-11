@@ -26,11 +26,33 @@ response.setDateHeader("Expires",0);
 <fmt:formatDate pattern="yyyy-MM-dd" value="<%=new java.util.Date()%>"  var="today"/>
 
 <%
-ArrayList<HashMap<String, String>> rs = new ArrayList<HashMap<String, String>>();
+ArrayList<HashMap<String, String>> rows = new ArrayList<HashMap<String, String>>();
+ArrayList<HashMap<String, String>> cols = new ArrayList<HashMap<String, String>>();
+ArrayList<HashMap<String, String>> data = new ArrayList<HashMap<String, String>>();
 HashMap<String, String> params = new HashMap<String, String>(); 
 MySql1 mysql = new MySql1();
 
-rs = mysql.sqlidToList("excel-1-rows", params );
+rows = mysql.sqlidToList("excel-1-rows", params );
+
+if(rows == null) {
+	System.out.println("excel-1-rows is empty");
+}
+
+
+
+cols = mysql.sqlidToList("excel-1-cols", params );
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 %>

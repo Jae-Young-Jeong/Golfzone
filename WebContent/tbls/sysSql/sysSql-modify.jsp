@@ -26,6 +26,11 @@ response.setDateHeader("Expires",0);
 MyOptionBuilder ob_useYn = new MyOptionBuilder("useYn");
 %>
 
+
+<log:info>필수파라미터 -------------------------------
+sysSql_id=[${param.sysSql_id}]
+-------------------------------------</log:info>
+
 <sql:query var="SQL">
 select	CAST(M.sysSql_id as char) AS sysSql_id
 	,	FORMAT(M.sysSql_id, 0)  AS str_sysSql_id

@@ -6,19 +6,42 @@
 
 
 
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
-<title>whoami</title>
-<style type="text/css">
-	table tr td:nth-child(1) { text-align: right; padding-right: 10px; padding-left: 20px; }
-	* { font-size: 1.2rem; }
-</style>
+<title>golfzone</title>
+<jsp:include page="/includes/jsp-head.jsp"/>
+
+
+<fmt:formatDate pattern="yyyy-MM-dd" value="<%=new java.util.Date()%>"  var="nowStr"/>
+<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="<%=new java.util.Date()%>"  var="timeStr"/>
+
+<sql:setDataSource dataSource="jdbc/db" />
+
+<script type="text/javascript">
+
+</script>
 </head>
 <body>
 
-</head>
-<body>
+
+system time : <fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="<%=new java.util.Date()%>" /><br/><br/>
+
+
+<sql:query var="RS">
+select version() as ver, date_format(NOW(), '%Y-%m-%d %T') as dbtime from dual
+</sql:query>
+
+MySQL  
+<c:forEach var="p" items="${RS.rows}" varStatus="s">
+	${p.ver} , dbtime : ${p.dbtime}
+</c:forEach>
+<br/><br/>
+
+
 <table>
 	<tbody>
 		<tr><td>getServerInfo</td><td><%= application.getServerInfo() %></td></tr>
@@ -47,13 +70,5 @@
 	</tbody>
 	</tbody>
 </table>
-
-
-
-<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="<%=new java.util.Date()%>" />
-
-
-
-
 </body>
 </html>

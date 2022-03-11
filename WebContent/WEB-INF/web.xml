@@ -22,6 +22,9 @@
 		<param-name>LOCAL_CRYPT_KEY</param-name><param-value>golfzone!00</param-value>
 	</context-param>
 
+	<context-param>
+		<param-name>excel_save_path</param-name><param-value>C:/temp/excel_save</param-value>
+	</context-param>
 
 
 

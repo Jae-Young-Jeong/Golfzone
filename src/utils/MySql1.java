@@ -258,5 +258,122 @@ System.out.println("(" + count + ")" +  matcher.group().substring(1) + ",");
 
 		return(rowCount == 0 ? null : ret);
 	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public HashMap<String, String> sqlidToMap(String sqlid, HashMap<String, String> params ) {
+		String newSqlid = sqlid.replaceAll("--|[;']", "");
+		String sql 
+=  	"select	M.sysSql_id, M.sqlid, M.sqlnm,  D.sysSqlDtl_id,  D.sta_ymd, D.end_ymd, D.sqlText \n" 
++	"  from	sysSql		M\n"
++	"  join	sysSqlDtl	D on (D.sysSql_id = M.sysSql_id  and	date(now()) between D.sta_ymd and D.end_ymd)\n"
++	" where	M.useYn = 'Y'\n"
++	"   and	M.sqlid = '" + newSqlid + "'" 
+;
+		String sqlText = "";
+		
+//System.out.println("sqlidToList(...) : preSql=[" + sql + "]");
+//System.out.println();
+//System.out.println();
+
+		try (Connection cn =  MyDBConnection.getConnection(this.constr); Statement st = cn.createStatement(); ResultSet rs = st.executeQuery(sql); ) {
+
+			while(rs.next()) {
+				sqlText  = rs.getString("sqlText");
+			}
+			
+		} catch(Exception e) {
+			System.out.println( "exception.message=" + e.getMessage());
+			return null;
+		}
+//		System.out.println("------------------------------------------------------------------------------------------------");
+//		System.out.println(sqlid);
+//		System.out.println("------------------------------------------------------------------------------------------------");
+
+		return sqlToMap(sqlText, params);
+	}
+
+	
+	
+	
+	public HashMap<String, String> sqlToMap(String sql, HashMap<String, String> params ) {
+		String newsql1 = null; 
+		String newsql2 = sql;
+	    Matcher matcher = pattern.matcher(sql);
+//	    HashMap<String, String> placeHolders = new HashMap<String, String>();
+	    ArrayList<String> placeHolders = new ArrayList<String>();
+	    HashMap<String, String> ret = new HashMap<String, String>();
+		int rowCount = 0;
+
+//		System.out.println("input sql=[");
+//		System.out.println(sql);
+//		System.out.println("]");
+//		System.out.println();
+
+		
+		
+	    int count = 0;
+	    while(matcher.find()) {
+	        count++;
+System.out.println("(" + count + ")" +  matcher.group().substring(1) + ",");
+	        placeHolders.add(matcher.group().substring(1));
+	    }
+		
+	    newsql1 = sql.replaceAll(":([_0-9a-zA-Z]+)", "?");
+//	    System.out.println("new_sql=" + newsql);
+
+//		System.out.println("newsql1=[" + newsql1 + "]");
+//		System.out.println();
+	    
+	    
+		try (Connection cn =  MyDBConnection.getConnection(constr); Statement st = cn.createStatement();  ) {
+			PreparedStatement pstmt = cn.prepareStatement(newsql1);
+			ResultSet rs = null;
+			
+			
+			for(int n = 0; n < placeHolders.size(); n++) {
+//				System.out.println(String.valueOf(n) + "=" + params.get(n));
+//				System.out.println(params.get(n) + "=" +  (String) request.getParameter( params.get(n)) );
+				
+				pstmt.setString(n+1, (String) params.get( placeHolders.get(n) ));
+				newsql2 = newsql2.replaceAll(":" + placeHolders.get(n), params.get( placeHolders.get(n)));
+			}
+
+//System.out.println("newsql2=[" + newsql2 + "]");
+//System.out.println();
+
+			rowCount = 0;
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				ret.put(rs.getString(1), rs.getString(2));
+				rowCount++;
+			}
+//System.out.println("rowCount=[" + String.valueOf(rowCount) + "]");
+//System.out.println("ret=[" + ret.toString() + "]");
+//System.out.println();
+			
+		} catch(Exception e) {
+			System.out.println( "exception.message=" + e.getMessage());
+			System.out.println(newsql2);
+			return null;
+		}
+		
+
+		return(rowCount == 0 ? null : ret);
+	}
 	
 }

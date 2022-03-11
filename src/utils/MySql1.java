@@ -151,7 +151,6 @@ System.out.println(newsql2);
 	
 	public ArrayList<HashMap<String, String>> sqlidToList(String sqlid, HashMap<String, String> params ) {
 		String newSqlid = sqlid.replaceAll("--|[;']", "");
-		
 		String sql 
 =  	"select	M.sysSql_id, M.sqlid, M.sqlnm,  D.sysSqlDtl_id,  D.sta_ymd, D.end_ymd, D.sqlText \n" 
 +	"  from	sysSql		M\n"
@@ -159,21 +158,27 @@ System.out.println(newsql2);
 +	" where	M.useYn = 'Y'\n"
 +	"   and	M.sqlid = '" + newSqlid + "'" 
 ;
+		String sqlText = "";
+		
+//System.out.println("sqlidToList(...) : preSql=[" + sql + "]");
+//System.out.println();
+//System.out.println();
+
 		try (Connection cn =  MyDBConnection.getConnection(this.constr); Statement st = cn.createStatement(); ResultSet rs = st.executeQuery(sql); ) {
-			
+
 			while(rs.next()) {
-				sql  = rs.getString("sqlText");
+				sqlText  = rs.getString("sqlText");
 			}
 			
 		} catch(Exception e) {
 			System.out.println( "exception.message=" + e.getMessage());
 			return null;
 		}
-		System.out.println("------------------------------------------------------------------------------------------------");
-		System.out.println(sqlid);
-		System.out.println("------------------------------------------------------------------------------------------------");
+//		System.out.println("------------------------------------------------------------------------------------------------");
+//		System.out.println(sqlid);
+//		System.out.println("------------------------------------------------------------------------------------------------");
 
-		return sqlToList(sql, params);
+		return sqlToList(sqlText, params);
 	}
 
 	
@@ -182,28 +187,36 @@ System.out.println(newsql2);
 	public ArrayList<HashMap<String, String>> sqlToList(String sql, HashMap<String, String> params ) {
 		String newsql1 = null; 
 		String newsql2 = sql;
-		StringBuilder buf = new StringBuilder();
-		
 	    Matcher matcher = pattern.matcher(sql);
 //	    HashMap<String, String> placeHolders = new HashMap<String, String>();
 	    ArrayList<String> placeHolders = new ArrayList<String>();
 	    ArrayList<HashMap<String, String>> ret = new ArrayList<HashMap<String, String>>();
 		int rowCount = 0;
 
+//		System.out.println("input sql=[");
+//		System.out.println(sql);
+//		System.out.println("]");
+//		System.out.println();
+
+		
+		
 	    int count = 0;
 	    while(matcher.find()) {
 	        count++;
-	        System.out.print("(" + count + ")" +  matcher.group().substring(1) + ",");
+System.out.println("(" + count + ")" +  matcher.group().substring(1) + ",");
 	        placeHolders.add(matcher.group().substring(1));
 	    }
 		
 	    newsql1 = sql.replaceAll(":([_0-9a-zA-Z]+)", "?");
 //	    System.out.println("new_sql=" + newsql);
-		
+
+//		System.out.println("newsql1=[" + newsql1 + "]");
+//		System.out.println();
+	    
+	    
 		try (Connection cn =  MyDBConnection.getConnection(constr); Statement st = cn.createStatement();  ) {
 			PreparedStatement pstmt = cn.prepareStatement(newsql1);
 			ResultSet rs = null;
-			String objDelimiter = "";
 			
 			
 			for(int n = 0; n < placeHolders.size(); n++) {
@@ -213,14 +226,14 @@ System.out.println(newsql2);
 				pstmt.setString(n+1, (String) params.get( placeHolders.get(n) ));
 				newsql2 = newsql2.replaceAll(":" + placeHolders.get(n), params.get( placeHolders.get(n)));
 			}
-System.out.println();
-System.out.println(newsql2);
+
+//System.out.println("newsql2=[" + newsql2 + "]");
+//System.out.println();
 
 			rs = pstmt.executeQuery();
 			
 			ResultSetMetaData meta = rs.getMetaData();
 
-			buf.append("{\"items\":[");
 			rowCount = 0;
 			while(rs.next()) {
 				int cc = meta.getColumnCount();
@@ -232,6 +245,9 @@ System.out.println(newsql2);
 				ret.add(row);
 				rowCount++;
 			}
+//System.out.println("rowCount=[" + String.valueOf(rowCount) + "]");
+//System.out.println("ret=[" + ret.toString() + "]");
+//System.out.println();
 			
 		} catch(Exception e) {
 			System.out.println( "exception.message=" + e.getMessage());

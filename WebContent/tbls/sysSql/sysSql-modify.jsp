@@ -23,7 +23,7 @@ response.setDateHeader("Expires",0);
 <fmt:formatDate pattern="yyyy-MM-dd" value="<%=new java.util.Date()%>"  var="today"/>
 
 <%
-MyOptionBuilder ob_useYn = new MyOptionBuilder("useYn");
+MyOptionBuilder ob_useYn = new MyOptionBuilder("ynType");
 %>
 
 

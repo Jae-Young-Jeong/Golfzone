@@ -4,6 +4,7 @@ DESCRIPTION : 권한자(팀장, 원장) 이  본인또는 하위 사원이 등�
     VERSION : 
     HISTORY : 
 ---------------------------------------------------------------------------- --%>
+<%@page import="sun.reflect.ReflectionFactory.GetReflectionFactoryAction"%>
 <%@page import="utils.MySql1"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
@@ -26,27 +27,48 @@ response.setDateHeader("Expires",0);
 <fmt:formatDate pattern="yyyy-MM-dd" value="<%=new java.util.Date()%>"  var="today"/>
 
 <%
+/*
 ArrayList<HashMap<String, String>> rows = new ArrayList<HashMap<String, String>>();
 ArrayList<HashMap<String, String>> cols = new ArrayList<HashMap<String, String>>();
 ArrayList<HashMap<String, String>> data = new ArrayList<HashMap<String, String>>();
 HashMap<String, String> params = new HashMap<String, String>(); 
 MySql1 mysql = new MySql1();
 
-rows = mysql.sqlidToList("excel-1-rows", params );
 
+params.put("term_sta_ymd", "2022-01-01");
+params.put("term_end_ymd", "2022-12-31");
+
+rows = mysql.sqlidToList("excel-1-rows", params );
 if(rows == null) {
 	System.out.println("excel-1-rows is empty");
+} else {
+	System.out.println("rows=" + String.valueOf(rows.size()));
 }
 
 
 
 cols = mysql.sqlidToList("excel-1-cols", params );
+if(cols == null) {
+	System.out.println("excel-1-cols is empty");
+} else {
+	System.out.println("cols=" + String.valueOf(cols.size()));
+}
+
+
+
+data = mysql.sqlidToList("excel-1-data", params );
+if(data == null) {
+	System.out.println("excel-1-data is empty");
+} else {
+	System.out.println("data=" + String.valueOf(cols.size()));
+}
+*/
 
 
 
 
-
-
+String xlsPath = application.getRealPath("/xlsx");
+System.out.println(xlsPath);
 
 
 

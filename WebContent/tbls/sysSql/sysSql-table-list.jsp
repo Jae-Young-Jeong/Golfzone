@@ -25,7 +25,7 @@ response.setDateHeader("Expires",0);
 
 
 <%
-MyOptionBuilder ob_useYn = new MyOptionBuilder("useYn");
+MyOptionBuilder ob_useYn = new MyOptionBuilder("ynType");
 %>
 
 
